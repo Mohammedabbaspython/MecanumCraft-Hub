@@ -1,0 +1,38 @@
+#: import DirectTerminalScreen DirectTerminalScreen.DirectTerminalScreen
+
+<DirectTerminalScreen>:
+    BoxLayout:
+        orientation: "vertical"
+        spacing: dp(16)
+        MDTopAppBar:
+            id: tb
+            title: "Direct Terminal"
+            left_action_items: [["arrow-left", lambda x: root.switch_screen()]]
+            right_action_items: [["trash-can", lambda x: root.clear_terminal()]]
+
+        BoxLayout:
+            padding: dp(15)
+            size_hint_y: 0.15
+            orientation: "vertical"
+            BoxLayout:
+                orientation: "horizontal"
+                MDTextField:
+                    id: cmd
+                    hint_text: "Command"
+                    on_text_validate:
+                        root.update_container(self.text)
+                        app.send(self.text)
+                        self.text = ""
+                MDIconButton:
+                    icon: "send"
+                    on_press:
+                        root.update_container(cmd.text)
+                        app.send(cmd.text)
+                        cmd.text = ""
+        ScrollView:
+            MDGridLayout:
+                id: container
+                adaptive_height: True
+                cols: 1
+                padding: dp(30)
+                spacing: dp(30)

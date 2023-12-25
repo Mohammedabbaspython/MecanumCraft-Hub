@@ -1,0 +1,27 @@
+#: include screens/JoystickScreen.kv
+#: include screens/GamepadScreen.kv
+#: include screens/DirectTerminalScreen.kv
+#: include screens/OptionsScreen.kv
+
+
+MainWidget:
+
+<MainWidget@ScreenManager>:
+    id: screen_manager
+    previous_screen: "JoystickScreen"
+
+    JoystickScreen:
+        name: "JoystickScreen"
+        _app: app
+
+    GamepadScreen:
+        name: "GamepadScreen"
+        _app: app
+
+    DirectTerminalScreen:
+        name: "DirectTerminalScreen"
+        _app: app
+
+    OptionsScreen:
+        name: "OptionsScreen"
+        _app: app

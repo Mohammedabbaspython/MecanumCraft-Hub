@@ -1,0 +1,25 @@
+#: import * GamepadLabels
+
+<AxisLabel>:
+    orientation: "horizontal"
+    Label:
+        text: "axis " + root.name
+    Label:
+        id: axis_value
+        text: "0"
+
+<ButtonLabel>:
+    orientation: "horizontal"
+    Label:
+        text: "button " + root.name
+    Label:
+        id: button_value
+        text: "0"
+
+<HatLabel>:
+    orientation: "horizontal"
+    Label:
+        text: "hat " + root.name
+    Label:
+        id: hat_value
+        text: "(0, 0)"

@@ -1,0 +1,57 @@
+#: import OptionsScreen OptionsScreen.OptionsScreen
+
+<OptionsScreen>:
+    MDBoxLayout:
+        orientation: "vertical"
+        MDTopAppBar:
+            id: tb
+            title: "Options"
+            left_action_items: [["arrow-left", lambda x: root.switch_screen()]]
+
+        MDBoxLayout:
+            padding: dp(30)
+            spacing: dp(30)
+            orientation: "vertical"
+            MDBoxLayout:
+                orientation: "horizontal"
+                pos_hint: {"center_x": .5, "center_y": .5}
+                spacing: dp(30)
+                MDLabel:
+                    text: "Connection method"
+                ToggleButton:
+                    id: wifi
+                    text: "Wi-Fi"
+                    group: "connection"
+                    state: "down" if root.get_option('connection method') == "wifi" else "normal"
+                    on_state:
+                        root.update_option("connection method", "wifi")
+                ToggleButton:
+                    id: bluetooth
+                    text: "Bluetooth"
+                    group: "connection"
+                    state: "down" if root.get_option('connection method') == "bluetooth" else "normal"
+                    on_state:
+                        root.update_option("connection method", "bluetooth")
+
+            MDBoxLayout:
+                MDTextField:
+                    id: ip_tf
+                    hint_text: "IP Address"
+                    text: root.get_option('ip address')
+                    on_text_validate: root.update_option("ip address", self.text)
+                MDIconButton:
+                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                    icon: "check-circle-outline"
+                    on_press: root.update_option("ip address", ip_tf.text)
+
+            MDBoxLayout:
+                MDLabel:
+                    text: "Joysticks Rounding"
+                MDRaisedButton:
+                    text: root.get_option('joysticks rounding')
+                    on_press: root.open_rounding_menu(self)
+
+
+            Widget:
+            Widget:
+            Widget:

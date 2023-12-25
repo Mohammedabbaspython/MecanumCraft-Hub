@@ -1,0 +1,14 @@
+#: import GamepadScreen GamepadScreen.GamepadScreen
+#: include screens/GamepadLabels.kv
+
+<GamepadScreen>:
+    BoxLayout:
+        orientation: "vertical"
+        MDTopAppBar:
+            id: tb
+            title: "Gamepad"
+            right_action_items: [["console", lambda x: root.switch_screen("DirectTerminalScreen")], ["wrench", lambda x: root.switch_screen("OptionsScreen")], ["connection", lambda x: app.ports_menu(self)], ["gamepad-variant", lambda x: root.switch_screen("JoystickScreen")]]
+        GridLayout:
+            id: container
+            rows: 8
+            cols: 3

@@ -1,0 +1,56 @@
+#: import Joystick local_packages.joystick.Joystick
+#: import JoystickScreen JoystickScreen.JoystickScreen
+
+
+<JoyStickScreen>:
+    left_joystick: left_joystick
+    right_joystick: right_joystick
+    BoxLayout:
+        orientation: "vertical"
+        MDTopAppBar:
+            id: tb
+            title: "Joystick"
+            right_action_items: [["console", lambda x: root.switch_screen("DirectTerminalScreen")], ["wrench", lambda x: root.switch_screen("OptionsScreen")], ["connection", lambda x: app.ports_menu(self)], ["gamepad-variant", lambda x: root.switch_screen("GamepadScreen")]]
+        BoxLayout:
+            orientation: "horizontal"
+            JoystickWithLabel:
+                id: left_joystick
+                name: "lj"
+
+            JoystickWithLabel:
+                id: right_joystick
+                name: "rj"
+
+
+<JoystickWithLabel@BoxLayout>:
+    orientation: "vertical"
+    name: ""
+    joystick: joystick
+    BoxLayout:
+        orientation: "horizontal"
+        Label:
+            id: x_label
+            text: f"x = 0"
+        Label:
+            id: y_label
+            text: f"y = 0"
+    Joystick:
+        id: joystick
+        x_pad: 0.0
+        y_pad: 0.0
+        on_pad:
+            x_label.text = f"x = {app.round_axis_value(self.pad[0])}"
+            y_label.text = f"y = {app.round_axis_value(self.pad[1])}"
+        sticky: False
+        outer_size: 0
+        inner_size: 0.75
+        pad_size:   0.5
+        outer_line_width: 0.01
+        inner_line_width: 0.01
+        pad_line_width:   0.01
+        outer_background_color: (0.75, 0.75, 0.75, 0.3)
+        outer_line_color:       (0.25, 0.25, 0.25, 0.3)
+        inner_background_color: (0.75, 0.75, 0.75, 0.1)
+        inner_line_color:       (0.7,  0.7,  0.7,  0.1)
+        pad_background_color:   (0.4,  0.4,  0.4,  0.3)
+        pad_line_color:         (0.35, 0.35, 0.35, 0.3)
